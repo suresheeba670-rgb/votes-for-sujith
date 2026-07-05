@@ -17,6 +17,8 @@
     --white: #FFFFFF;
     --line: rgba(43, 36, 16, 0.14);
     --shadow-hard: 6px 6px 0 var(--ink);
+    --green: #2E7D32;
+    --red: #B3261E;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,6 +41,7 @@
 
   .mono { font-family: 'JetBrains Mono', monospace; }
   a { color: inherit; }
+  button { font-family: inherit; }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
@@ -69,11 +72,11 @@
     border: 2.5px solid var(--ink);
     display: inline-block;
   }
-  nav ul { list-style: none; display: flex; gap: 26px; }
+  nav ul { list-style: none; display: flex; gap: 22px; }
   nav a {
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     padding-bottom: 3px;
@@ -88,7 +91,7 @@
     border: 2px solid var(--ink);
   }
   .nav-cta:hover { background: var(--yellow); color: var(--ink) !important; }
-  @media (max-width: 860px) { nav ul { display: none; } }
+  @media (max-width: 900px) { nav ul { display: none; } }
 
   /* ---------- Hero ---------- */
   .hero {
@@ -164,6 +167,7 @@
   }
   .btn-primary { background: var(--ink); color: var(--yellow); box-shadow: var(--shadow-hard); }
   .btn-primary:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: var(--shadow-hard); }
   .btn-secondary { background: var(--white); color: var(--ink); }
   .btn-secondary:hover { background: var(--ink); color: var(--yellow); }
 
@@ -210,6 +214,53 @@
   }
   .section-title { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 18px; }
   .section-intro { max-width: 62ch; font-size: 1.05rem; color: var(--ink); opacity: 0.75; margin-bottom: 48px; }
+
+  /* ---------- Countdown ---------- */
+  .countdown-section {
+    background: var(--ink);
+    text-align: center;
+  }
+  .countdown-section .eyebrow { color: var(--yellow); }
+  .countdown-section .section-title { color: var(--cream); }
+  .countdown-section .section-intro { color: var(--cream); opacity: 0.75; margin-left: auto; margin-right: auto; }
+  .timer-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .timer-box {
+    background: var(--yellow);
+    border: 3px solid var(--cream);
+    padding: 20px 22px;
+    min-width: 100px;
+  }
+  .timer-box .num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2.4rem;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .timer-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 6px;
+    color: var(--ink);
+    opacity: 0.75;
+  }
+  .live-banner {
+    display: none;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    padding: 16px 20px;
+    border: 3px solid var(--cream);
+    margin-top: 10px;
+  }
 
   /* ---------- Promises (Unity / Initiative / Dedication) ---------- */
   .promise-grid {
@@ -287,6 +338,87 @@
   .plan-step h4 { font-size: 1rem; font-family: 'Space Grotesk', sans-serif; font-weight: 700; margin-bottom: 8px; }
   .plan-step p { font-size: 0.88rem; opacity: 0.8; }
 
+  /* ---------- Poll ---------- */
+  .poll-section { background: var(--yellow-soft); border-top: 4px solid var(--ink); border-bottom: 4px solid var(--ink); }
+  .poll-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    background: var(--white);
+    border: 2px dashed var(--ink);
+    padding: 12px 16px;
+    margin-bottom: 30px;
+    max-width: 62ch;
+  }
+  .grade-picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .grade-btn {
+    background: var(--white);
+    border: 3px solid var(--ink);
+    padding: 18px 8px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .grade-btn:hover:not(:disabled) { background: var(--yellow); transform: translateY(-2px); }
+  .grade-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .grade-btn.selected { background: var(--ink); color: var(--yellow); }
+
+  .poll-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    padding: 14px 18px;
+    border: 2px solid var(--ink);
+    margin-bottom: 40px;
+    display: none;
+  }
+  .poll-status.show { display: block; }
+  .poll-status.success { background: #DDF3DD; border-color: var(--green); color: var(--green); }
+  .poll-status.error { background: #FBE0DE; border-color: var(--red); color: var(--red); }
+
+  .results-title {
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+    opacity: 0.7;
+  }
+  .result-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 60px;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+  }
+  .result-row .grade-label { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+  .result-bar-track {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    height: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .result-bar-fill {
+    background: var(--ink);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .result-row .count { font-family: 'JetBrains Mono', monospace; text-align: right; font-weight: 700; }
+  .total-pledges {
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    border-top: 2px solid var(--ink);
+    padding-top: 16px;
+  }
+
   /* ---------- Vote CTA ---------- */
   .vote-cta {
     background: var(--yellow);
@@ -327,9 +459,10 @@
 <nav>
   <div class="nav-mark"><span class="box"></span> SUJITH · YELLOW HOUSE</div>
   <ul>
+    <li><a href="#countdown">Countdown</a></li>
     <li><a href="#promises">Promises</a></li>
     <li><a href="#pillars">Five Ways</a></li>
-    <li><a href="#plan">The Plan</a></li>
+    <li><a href="#poll">Show Support</a></li>
     <li><a href="#vote" class="nav-cta">Vote Now</a></li>
   </ul>
 </nav>
@@ -337,14 +470,14 @@
 <header class="hero">
   <div class="hero-grid">
     <div>
-      <div class="date-tag"><span class="dot"></span> ELECTION DAY · 11 JULY · YELLOW HOUSE 2026</div>
+      <div class="date-tag"><span class="dot"></span> ELECTION DAY · 11 JULY, 11:00 AM · YELLOW HOUSE 2026</div>
       <h1>VOTE <span>SUJITH</span><br>FOR VICE&nbsp;CAPTAIN</h1>
       <p class="role-line">Grade 6–12 · Yellow House Council</p>
       <div class="slogan">"Together We Lead, Together We Win."</div>
-      <p class="lede">11th of July is the day Yellow House decides its next leader. Here is exactly what I promise, in simple, doable steps — for every grade, from 6 to 12.</p>
+      <p class="lede">11th of July, 11 AM, is the moment Yellow House decides its next leader. Here is exactly what I promise, in simple, doable steps — for every grade, from 6 to 12.</p>
       <div class="hero-actions">
         <a href="#promises" class="btn btn-primary">See My Promises</a>
-        <a href="#vote" class="btn btn-secondary">How to Vote</a>
+        <a href="#poll" class="btn btn-secondary">Show Your Support</a>
       </div>
     </div>
     <div class="ballot-card">
@@ -367,6 +500,21 @@
     </div>
   </div>
 </header>
+
+<section id="countdown" class="countdown-section">
+  <div class="wrap">
+    <span class="eyebrow">Time Left</span>
+    <h2 class="section-title">Election Day Countdown</h2>
+    <p class="section-intro">Voting opens 11 July at 11:00 AM. Here's exactly how long Yellow House has to get ready.</p>
+    <div id="timerRow" class="timer-row">
+      <div class="timer-box"><div class="num" id="cd-days">--</div><div class="label">Days</div></div>
+      <div class="timer-box"><div class="num" id="cd-hours">--</div><div class="label">Hours</div></div>
+      <div class="timer-box"><div class="num" id="cd-mins">--</div><div class="label">Minutes</div></div>
+      <div class="timer-box"><div class="num" id="cd-secs">--</div><div class="label">Seconds</div></div>
+    </div>
+    <div id="liveBanner" class="live-banner">🗳️ Voting is open now — go cast your vote for Sujith!</div>
+  </div>
+</section>
 
 <section id="promises">
   <div class="wrap">
@@ -458,23 +606,183 @@
   </div>
 </section>
 
+<section id="poll" class="poll-section">
+  <div class="wrap">
+    <span class="eyebrow">Grade-Wise Support</span>
+    <h2 class="section-title">Which Grade Are You In?</h2>
+    <p class="section-intro">Pick your grade below to show your support for Sujith. One pledge per visitor — the tally below updates live for everyone who visits this page.</p>
+    <div class="poll-note">Note: this is an informal support tracker, not the official school ballot. Vote counts shown here are visible to anyone who opens this page. The real vote must still be cast through your school's official election process on 11 July.</div>
+
+    <div class="grade-picker" id="gradePicker">
+      <button class="grade-btn" data-grade="6">6</button>
+      <button class="grade-btn" data-grade="7">7</button>
+      <button class="grade-btn" data-grade="8">8</button>
+      <button class="grade-btn" data-grade="9">9</button>
+      <button class="grade-btn" data-grade="10">10</button>
+      <button class="grade-btn" data-grade="11">11</button>
+      <button class="grade-btn" data-grade="12">12</button>
+    </div>
+
+    <div id="pollStatus" class="poll-status"></div>
+
+    <div class="results-title">Live Support Tally</div>
+    <div id="resultsList"></div>
+    <div class="total-pledges" id="totalPledges">Total pledges: 0</div>
+  </div>
+</section>
+
 <section id="vote" class="vote-cta">
   <div class="wrap">
-    <span class="eyebrow" style="color:var(--ink);">Election Day · 11 July</span>
+    <span class="eyebrow" style="color:var(--ink);">Election Day · 11 July, 11:00 AM</span>
     <h2 class="section-title">Grade 6 to 12 — This Is Your Decision.</h2>
-    <p>On the 11th of July, every student in Yellow House — from the youngest in Grade 6 to the seniors in Grade 12 — gets one vote. Use it for a Vice Captain who has written down simple, real promises and will show up every day to keep them.</p>
+    <p>On the 11th of July at 11 AM, every student in Yellow House — from the youngest in Grade 6 to the seniors in Grade 12 — gets one vote. Use it for a Vice Captain who has written down simple, real promises and will show up every day to keep them.</p>
     <div class="grade-row">
       <div class="grade-box">6</div><div class="grade-box">7</div><div class="grade-box">8</div>
       <div class="grade-box">9</div><div class="grade-box">10</div><div class="grade-box">11</div><div class="grade-box">12</div>
     </div>
-    <a href="#" class="btn btn-primary">I'm Voting for Sujith on 11 July</a>
+    <a href="#poll" class="btn btn-primary">I'm Voting for Sujith on 11 July</a>
     <div class="final-slogan">Let's Lead. Let's Win.<br>Let's Make Our House Proud.</div>
   </div>
 </section>
 
 <footer>
-  YELLOW HOUSE · VICE CAPTAIN ELECTION · 11 JULY 2026 · SUJITH FOR YELLOW HOUSE
+  YELLOW HOUSE · VICE CAPTAIN ELECTION · 11 JULY 2026, 11:00 AM · SUJITH FOR YELLOW HOUSE
 </footer>
+
+<script>
+  // ---------- Countdown timer ----------
+  const electionDate = new Date('2026-07-11T11:00:00');
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = electionDate - now;
+    const timerRow = document.getElementById('timerRow');
+    const liveBanner = document.getElementById('liveBanner');
+
+    if (diff <= 0) {
+      timerRow.style.display = 'none';
+      liveBanner.style.display = 'block';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const mins = Math.floor((diff / (1000 * 60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ---------- Grade-wise poll ----------
+  const GRADES = [6, 7, 8, 9, 10, 11, 12];
+  const gradePicker = document.getElementById('gradePicker');
+  const pollStatus = document.getElementById('pollStatus');
+  const resultsList = document.getElementById('resultsList');
+  const totalPledgesEl = document.getElementById('totalPledges');
+
+  function showStatus(message, type) {
+    pollStatus.textContent = message;
+    pollStatus.className = 'poll-status show ' + type;
+  }
+
+  async function getGradeCount(grade) {
+    try {
+      const res = await window.storage.get('votes:grade' + grade, true);
+      return res ? parseInt(res.value, 10) || 0 : 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  async function loadResults() {
+    try {
+      const counts = {};
+      let total = 0;
+      for (const g of GRADES) {
+        const c = await getGradeCount(g);
+        counts[g] = c;
+        total += c;
+      }
+      const maxCount = Math.max(1, ...Object.values(counts));
+      resultsList.innerHTML = GRADES.map(g => {
+        const c = counts[g];
+        const pct = Math.round((c / maxCount) * 100);
+        return '<div class="result-row">' +
+          '<div class="grade-label">Grade ' + g + '</div>' +
+          '<div class="result-bar-track"><div class="result-bar-fill" style="width:' + pct + '%"></div></div>' +
+          '<div class="count">' + c + '</div>' +
+          '</div>';
+      }).join('');
+      totalPledgesEl.textContent = 'Total pledges: ' + total;
+    } catch (e) {
+      resultsList.innerHTML = '<div class="poll-note">Could not load live results right now.</div>';
+    }
+  }
+
+  async function checkAlreadyVoted() {
+    try {
+      const res = await window.storage.get('has-voted', false);
+      return res ? JSON.parse(res.value) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function castVote(grade) {
+    const buttons = gradePicker.querySelectorAll('.grade-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    try {
+      const already = await checkAlreadyVoted();
+      if (already) {
+        showStatus('You already showed your support as a Grade ' + already + ' student. Thank you!', 'success');
+        buttons.forEach(b => {
+          if (parseInt(b.dataset.grade, 10) === already) b.classList.add('selected');
+        });
+        return;
+      }
+
+      const current = await getGradeCount(grade);
+      const setResult = await window.storage.set('votes:grade' + grade, String(current + 1), true);
+      if (!setResult) throw new Error('write failed');
+
+      await window.storage.set('has-voted', JSON.stringify(grade), false);
+
+      const clicked = gradePicker.querySelector('[data-grade="' + grade + '"]');
+      if (clicked) clicked.classList.add('selected');
+
+      showStatus('Thanks for showing your support, Grade ' + grade + '! Don\\'t forget to cast your real vote on 11 July.', 'success');
+      loadResults();
+    } catch (e) {
+      showStatus('Something went wrong saving your pledge. Please try again.', 'error');
+      buttons.forEach(b => b.disabled = false);
+    }
+  }
+
+  gradePicker.addEventListener('click', (e) => {
+    const btn = e.target.closest('.grade-btn');
+    if (!btn || btn.disabled) return;
+    const grade = parseInt(btn.dataset.grade, 10);
+    castVote(grade);
+  });
+
+  (async function init() {
+    await loadResults();
+    const already = await checkAlreadyVoted();
+    if (already) {
+      const buttons = gradePicker.querySelectorAll('.grade-btn');
+      buttons.forEach(b => b.disabled = true);
+      const clicked = gradePicker.querySelector('[data-grade="' + already + '"]');
+      if (clicked) clicked.classList.add('selected');
+      showStatus('You already showed your support as a Grade ' + already + ' student. Thank you!', 'success');
+    }
+  })();
+</script>
 
 </body>
 </html>
