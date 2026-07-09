@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -518,7 +518,7 @@
 
 <section id="promises">
   <div class="wrap">
-    <span class="eyebrow">My Promise</span>
+    <span class="eyebrow">My Promise  (Birla--om-bryson)</span>
     <h2 class="section-title">Unity. Initiative. Dedication.</h2>
     <p class="section-intro">Three simple promises I will keep to every student in Yellow House, from Grade 6 to Grade 12.</p>
     <div class="promise-grid">
